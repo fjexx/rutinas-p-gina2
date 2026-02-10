@@ -1,6 +1,6 @@
 // Frontend Configuration
 const CONFIG = {
-    API_URL: 'http://localhost:5001/api',
+    API_URL: 'TU_URL_DE_RAILWAY_AQUI/api',  // Actualiza esto cuando tengas la URL de Railway
     ENDPOINTS: {
         AUTH: {
             LOGIN: '/auth/login',
