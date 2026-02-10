@@ -929,8 +929,15 @@ select option:checked {
     }
     
     header.hero-banner {
-        padding: 50px 0 50px 0;
-        min-height: auto; /* Altura automática basada en contenido */
+        padding: 50px 0;
+        min-height: 650px; /* Altura fija para mostrar todo el contenido */
+    }
+    
+    .hero-content {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        min-height: 550px;
     }
     
     header.hero-banner::before {
@@ -1138,8 +1145,12 @@ select option:checked {
     }
     
     header.hero-banner {
-        padding: 40px 0 40px 0;
-        min-height: auto; /* Altura automática */
+        padding: 40px 0;
+        min-height: 600px; /* Altura fija para móviles pequeños */
+    }
+    
+    .hero-content {
+        min-height: 500px;
     }
     
     header h1 {
