@@ -10,6 +10,8 @@ const { protegerRuta } = require('../middleware/auth');
 // @access  Public
 router.post('/register', async (req, res) => {
     try {
+        console.log('📝 Register attempt:', { email: req.body.email, nombre: req.body.nombre });
+        
         const { 
             nombre, 
             email, 
@@ -28,11 +30,14 @@ router.post('/register', async (req, res) => {
         // Verificar si el usuario ya existe
         let usuario = await User.findOne({ email });
         if (usuario) {
+            console.log('❌ Usuario ya existe:', email);
             return res.status(400).json({
                 success: false,
                 message: 'El usuario ya existe'
             });
         }
+
+        console.log('✅ Creando nuevo usuario:', email);
 
         // Crear nuevo usuario
         usuario = new User({
@@ -51,6 +56,7 @@ router.post('/register', async (req, res) => {
         });
 
         await usuario.save();
+        console.log('✅ Usuario guardado en DB:', email);
 
         // Crear JWT
         const payload = {
@@ -64,7 +70,11 @@ router.post('/register', async (req, res) => {
             process.env.JWT_SECRET,
             { expiresIn: '7d' },
             (err, token) => {
-                if (err) throw err;
+                if (err) {
+                    console.error('❌ Error al crear JWT:', err);
+                    throw err;
+                }
+                console.log('✅ Registro exitoso para:', email);
                 res.status(201).json({
                     success: true,
                     token,
@@ -88,7 +98,8 @@ router.post('/register', async (req, res) => {
             }
         );
     } catch (error) {
-        console.error(error.message);
+        console.error('❌ Error en register:', error.message);
+        console.error('Stack:', error.stack);
         res.status(500).json({
             success: false,
             message: 'Error del servidor'
@@ -101,25 +112,32 @@ router.post('/register', async (req, res) => {
 // @access  Public
 router.post('/login', async (req, res) => {
     try {
+        console.log('🔐 Login attempt:', { email: req.body.email });
         const { email, password } = req.body;
 
         // Verificar si el usuario existe
         let usuario = await User.findOne({ email }).select('+password');
         if (!usuario) {
+            console.log('❌ Usuario no encontrado:', email);
             return res.status(400).json({
                 success: false,
                 message: 'Credenciales inválidas'
             });
         }
 
+        console.log('✅ Usuario encontrado:', email);
+
         // Verificar contraseña
         const esValida = await bcrypt.compare(password, usuario.password);
         if (!esValida) {
+            console.log('❌ Contraseña inválida para:', email);
             return res.status(400).json({
                 success: false,
                 message: 'Credenciales inválidas'
             });
         }
+
+        console.log('✅ Contraseña válida para:', email);
 
         // Crear JWT
         const payload = {
@@ -133,7 +151,11 @@ router.post('/login', async (req, res) => {
             process.env.JWT_SECRET,
             { expiresIn: '7d' },
             (err, token) => {
-                if (err) throw err;
+                if (err) {
+                    console.error('❌ Error al crear JWT:', err);
+                    throw err;
+                }
+                console.log('✅ Login exitoso para:', email);
                 res.json({
                     success: true,
                     token,
@@ -157,7 +179,8 @@ router.post('/login', async (req, res) => {
             }
         );
     } catch (error) {
-        console.error(error.message);
+        console.error('❌ Error en login:', error.message);
+        console.error('Stack:', error.stack);
         res.status(500).json({
             success: false,
             message: 'Error del servidor'
