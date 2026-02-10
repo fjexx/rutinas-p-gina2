@@ -1,0 +1,263 @@
+# ==========================================
+# ARCHIVOS DE ENTORNO Y CONFIGURACIÓN
+# ==========================================
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# ==========================================
+# NODE.JS
+# ==========================================
+# Dependencias
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage directory used by tools like istanbul
+coverage/
+*.lcov
+
+# nyc test coverage
+.nyc_output
+
+# Grunt intermediate storage
+.grunt
+
+# Bower dependency directory
+bower_components
+
+# node-waf configuration
+.lock-wscript
+
+# Compiled binary addons
+build/Release
+
+# Dependency directories
+jspm_packages/
+
+# TypeScript cache
+*.tsbuildinfo
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Microbundle cache
+.rpt2_cache/
+.rts2_cache_cjs/
+.rts2_cache_es/
+.rts2_cache_umd/
+
+# Optional REPL history
+.node_repl_history
+
+# Output of 'npm pack'
+*.tgz
+
+# Yarn Integrity file
+.yarn-integrity
+
+# parcel-bundler cache
+.cache
+.parcel-cache
+
+# Next.js build output
+.next
+
+# Nuxt.js build / generate output
+.nuxt
+dist
+
+# Gatsby files
+.cache/
+public
+
+# Storybook build outputs
+.out
+.storybook-out
+
+# ==========================================
+# BASES DE DATOS
+# ==========================================
+# MongoDB
+*.db
+*.sqlite
+*.sqlite3
+
+# Logs de base de datos
+*.log
+
+# ==========================================
+# EDITORES E IDEs
+# ==========================================
+# Visual Studio Code
+.vscode/
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# IntelliJ IDEA
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Vim
+*.swp
+*.swo
+*~
+
+# Emacs
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+*.elc
+auto-save-list
+tramp
+.\#*
+
+# ==========================================
+# SISTEMA OPERATIVO
+# ==========================================
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+*.stackdump
+[Dd]esktop.ini
+$RECYCLE.BIN/
+*.cab
+*.msi
+*.msix
+*.msm
+*.msp
+*.lnk
+
+# Linux
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+.nfs*
+
+# ==========================================
+# ARCHIVOS TEMPORALES Y CACHE
+# ==========================================
+# Archivos temporales
+*.tmp
+*.temp
+*.swp
+*.swo
+*.bak
+*.backup
+*.orig
+
+# Cache de aplicaciones
+.cache/
+*.cache
+
+# ==========================================
+# ARCHIVOS DE CONSTRUCCIÓN Y DISTRIBUCIÓN
+# ==========================================
+# Build directories
+build/
+dist/
+out/
+
+# ==========================================
+# ARCHIVOS DE SEGURIDAD Y CERTIFICADOS
+# ==========================================
+# Claves privadas
+*.pem
+*.key
+*.crt
+*.cert
+*.p12
+*.pfx
+
+# ==========================================
+# ARCHIVOS DE LOGS
+# ==========================================
+# Logs generales
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ==========================================
+# ARCHIVOS ESPECÍFICOS DEL PROYECTO
+# ==========================================
+# Archivos de respaldo
+backup/
+backups/
+
+# Archivos de prueba temporales
+test-results/
+coverage/
+
+# Archivos de documentación generados
+docs/generated/
+
+# Archivos de configuración local
+config.local.js
+config.local.json
+
+# ==========================================
+# ARCHIVOS DE DEPLOYMENT
+# ==========================================
+# Vercel
+.vercel
+
+# Netlify
+.netlify
+
+# Heroku
+.heroku/
+
+# ==========================================
+# OTROS
+# ==========================================
+# Archivos de package-lock alternativos
+yarn.lock
+pnpm-lock.yaml
+
+# Archivos de configuración de editores
+.editorconfig
+
+# Archivos de linting
+.eslintrc.local.js
+.prettierrc.local.js

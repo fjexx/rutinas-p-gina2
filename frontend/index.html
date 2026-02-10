@@ -1,0 +1,1173 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Rutinas de ejercicios para todos los niveles: principiantes, intermedio y avanzado. Encuentra la rutina perfecta para tu nivel de fitness.">
+    <meta name="keywords" content="rutinas ejercicio, fitness, principiante, intermedio, avanzado, entrenamiento">
+    <title>Rutinas de Ejercicios - Por Niveles</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="auth.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="#" class="nav-logo" id="home-link">
+                <i class="fas fa-dumbbell"></i>
+                <span>Rutinas de Ejercicios</span>
+            </a>
+            <ul class="nav-menu">
+                <li><a href="#consejos" class="nav-link"><i class="fas fa-lightbulb"></i> Consejos</a></li>
+                <li><a href="#principiante" class="nav-link"><i class="fas fa-seedling"></i> Principiante</a></li>
+                <li><a href="#intermedio" class="nav-link"><i class="fas fa-fire"></i> Intermedio</a></li>
+                <li><a href="#avanzado" class="nav-link"><i class="fas fa-bolt"></i> Avanzado</a></li>
+                <li id="retakeQuizBtnContainer"><button id="retakeQuizBtn" class="nav-link quiz-btn"><i class="fas fa-question-circle"></i> Evaluar Nivel</button></li>
+                
+                <!-- Elementos para usuario no autenticado -->
+                <li id="loginNavBtn" class="auth-nav-item">
+                    <button class="nav-link auth-btn"><i class="fas fa-sign-in-alt"></i> Iniciar Sesión</button>
+                </li>
+                
+                <!-- Elementos para usuario autenticado (ocultos por defecto) -->
+                <li id="userMenuContainer" class="auth-nav-item" style="display: none;">
+                    <div class="user-dropdown">
+                        <button class="nav-link user-menu-btn">
+                            <i class="fas fa-user-circle"></i>
+                            <span id="userNameDisplay">Usuario</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="user-dropdown-menu">
+                            <a href="#" id="profileLink"><i class="fas fa-user"></i> Mi Perfil</a>
+                            <a href="#" id="progressLink"><i class="fas fa-chart-line"></i> Mi Progreso</a>
+                            <a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Barra de Progreso Global -->
+    <div id="progressBar" class="progress-bar-container" style="display: none;">
+        <div class="progress-bar-content">
+            <div class="progress-bar-header">
+                <div class="progress-bar-title">
+                    <i class="fas fa-trophy"></i>
+                    <span>Progreso Semanal</span>
+                </div>
+                <button class="progress-bar-close" id="closeProgressBar">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="progress-bar-stats">
+                <div class="stat-item">
+                    <div class="stat-label">Rutinas</div>
+                    <div class="stat-value">
+                        <span id="rutinasCompletadas">0</span>/<span id="rutinasObjetivo">3</span>
+                    </div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-label">Minutos</div>
+                    <div class="stat-value">
+                        <span id="minutosCompletados">0</span>/<span id="minutosObjetivo">90</span>
+                    </div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-label">Racha</div>
+                    <div class="stat-value">
+                        <i class="fas fa-fire" style="color: #f59e0b;"></i>
+                        <span id="rachaActual">0</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="progress-bar-visual">
+                <div class="progress-label">
+                    <span>Progreso General</span>
+                    <span class="progress-percentage" id="progressPercentage">0%</span>
+                </div>
+                <div class="progress-track">
+                    <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+                </div>
+            </div>
+            
+            <button class="reset-progress-btn" id="resetProgressBtn">
+                <i class="fas fa-redo-alt"></i>
+                Reiniciar Progreso Semanal
+            </button>
+        </div>
+    </div>
+    
+    <header class="hero-banner">
+        <div class="banner-overlay">
+            <div class="container hero-content">
+                <h1 class="hero-title">
+                    <i class="fas fa-dumbbell"></i> 
+                    Rutinas de Ejercicios
+                </h1>
+                <p class="hero-subtitle">Encuentra la rutina perfecta para tu nivel y alcanza tus objetivos fitness con nuestro sistema personalizado de entrenamiento</p>
+                
+                <!-- Cards de navegación rápida -->
+                <div class="level-cards">
+                    <div class="level-card" data-level="beginner">
+                        <div class="level-card-icon">
+                            <i class="fas fa-seedling"></i>
+                        </div>
+                        <h3>Principiante</h3>
+                        <p>Comienza tu viaje fitness</p>
+                    </div>
+                    
+                    <div class="level-card" data-level="intermediate">
+                        <div class="level-card-icon">
+                            <i class="fas fa-fire"></i>
+                        </div>
+                        <h3>Intermedio</h3>
+                        <p>Aumenta tu intensidad</p>
+                    </div>
+                    
+                    <div class="level-card" data-level="advanced">
+                        <div class="level-card-icon">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <h3>Avanzado</h3>
+                        <p>Desafía tus límites</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Sección de Consejos/Tips -->
+        <section class="tips-section" id="consejos">
+            <div class="tips-header">
+                <h2 class="section-title">
+                    <i class="fas fa-lightbulb"></i> 
+                    Consejos para tu Entrenamiento
+                </h2>
+                <p class="section-subtitle">Tips esenciales para maximizar tus resultados y alcanzar tus metas de forma segura y efectiva</p>
+            </div>
+            
+            <div class="tips-grid">
+                <div class="tip-card">
+                    <div class="tip-icon">
+                        <i class="fas fa-tint"></i>
+                    </div>
+                    <h3>Hidratación Constante</h3>
+                    <p>Bebe agua antes, durante y después del ejercicio. La hidratación adecuada mejora tu rendimiento, previene calambres y ayuda a la recuperación muscular. Mantén una botella de agua siempre cerca durante tus entrenamientos.</p>
+                </div>
+                
+                <div class="tip-card">
+                    <div class="tip-icon">
+                        <i class="fas fa-heartbeat"></i>
+                    </div>
+                    <h3>Calentamiento Esencial</h3>
+                    <p>Dedica 5-10 minutos a calentar antes de entrenar. Un buen calentamiento aumenta la temperatura corporal, mejora la flexibilidad y previene lesiones. Incluye movimientos dinámicos y estiramientos suaves para preparar tus músculos.</p>
+                </div>
+                
+                <div class="tip-card">
+                    <div class="tip-icon">
+                        <i class="fas fa-bed"></i>
+                    </div>
+                    <h3>Descanso Adecuado</h3>
+                    <p>El músculo crece durante el descanso, no durante el ejercicio. Duerme 7-8 horas diarias y toma al menos 1-2 días de recuperación por semana. El descanso es tan importante como el entrenamiento para ver resultados.</p>
+                </div>
+                
+                <div class="tip-card">
+                    <div class="tip-icon">
+                        <i class="fas fa-apple-alt"></i>
+                    </div>
+                    <h3>Nutrición Balanceada</h3>
+                    <p>Come proteínas y carbohidratos después de entrenar para recuperación óptima. La alimentación es el 70% de tus resultados. Incluye frutas, verduras, proteínas magras y grasas saludables en tu dieta diaria.</p>
+                </div>
+                
+                <div class="tip-card">
+                    <div class="tip-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Progresión Gradual</h3>
+                    <p>Aumenta la intensidad gradualmente cada semana. La sobrecarga progresiva es clave para el crecimiento muscular. La consistencia es más importante que la perfección. Pequeños pasos constantes generan grandes resultados.</p>
+                </div>
+                
+                <div class="tip-card">
+                    <div class="tip-icon">
+                        <i class="fas fa-user-check"></i>
+                    </div>
+                    <h3>Técnica Correcta</h3>
+                    <p>La forma correcta previene lesiones y maximiza resultados. Calidad sobre cantidad siempre. Es mejor hacer 10 repeticiones perfectas que 20 con mala técnica. Aprende la forma correcta antes de aumentar peso o intensidad.</p>
+                </div>
+            </div>
+        </section>
+        <!-- Nivel Principiante -->
+        <section class="routine-section" id="principiante">
+            <div class="section-header">
+                <h2 class="section-title">
+                    <i class="fas fa-seedling"></i> 
+                    Principiante
+                </h2>
+                <p class="section-subtitle">Perfecto para quienes están comenzando su viaje fitness. Estas rutinas están diseñadas para construir una base sólida, aprender la técnica correcta y desarrollar el hábito del ejercicio regular. Enfócate en la forma antes que en la intensidad.</p>
+            </div>
+            
+            <div class="routine-card">
+                <div class="image-container">
+                    <img src="imgs/principiante.png" alt="Ejercicios para principiantes" class="routine-image">
+                    <img src="imgs/principiante2.png" alt="Ejercicios para principiantes" class="routine-image">
+                </div>
+                
+                <div class="routine-content">
+                    <h3>Rutina Semanal para Principiantes</h3>
+                    <div class="routine-details">
+                        <div class="day-routine" data-routine-id="lunes-cardio" data-level="principiante">
+                            <h4>Lunes - Cardio Ligero</h4>
+                            <p class="day-summary">Caminata rápida, estiramientos y respiración</p>
+                            <button class="complete-routine-btn" data-routine-id="lunes-cardio" data-level="principiante">
+                                <i class="fas fa-check-circle"></i> Marcar como completada
+                            </button>
+                        </div>
+                        
+                        <div class="day-routine" data-routine-id="miercoles-fuerza" data-level="principiante">
+                            <h4>Miércoles - Fuerza Básica</h4>
+                            <p class="day-summary">Sentadillas, flexiones, plancha y abdominales</p>
+                            <button class="complete-routine-btn" data-routine-id="miercoles-fuerza" data-level="principiante">
+                                <i class="fas fa-check-circle"></i> Marcar como completada
+                            </button>
+                        </div>
+                        
+                        <div class="day-routine" data-routine-id="viernes-flex" data-level="principiante">
+                            <h4>Viernes - Flexibilidad</h4>
+                            <p class="day-summary">Yoga básico, estiramientos y relajación</p>
+                            <button class="complete-routine-btn" data-routine-id="viernes-flex" data-level="principiante">
+                                <i class="fas fa-check-circle"></i> Marcar como completada
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="tips">
+                        <strong><i class="fas fa-lightbulb"></i> Consejos:</strong>
+                        <p>Descansa entre series (30-60 segundos). Escucha a tu cuerpo y no te esfuerces demasiado. La consistencia es más importante que la intensidad.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Nivel Intermedio -->
+        <section class="routine-section" id="intermedio">
+            <div class="section-header">
+                <h2 class="section-title">
+                    <i class="fas fa-fire"></i> 
+                    Intermedio
+                </h2>
+                <p class="section-subtitle">Para quienes ya tienen experiencia y buscan un desafío mayor. Estas rutinas combinan ejercicios de fuerza y cardio para maximizar resultados. Aumenta la intensidad progresivamente y mantén la consistencia para ver cambios significativos en tu físico y resistencia.</p>
+            </div>
+            
+            <div class="routine-card">
+                <div class="image-container">
+                    <img src="imgs/intermedio.png" alt="Ejercicios intermedios" class="routine-image">
+                    <img src="imgs/intermedio2.png" alt="Ejercicios intermedios" class="routine-image">
+                </div>
+                
+                <div class="routine-content">
+                    <h3>Rutina Semanal Intermedia</h3>
+                    <div class="routine-details">
+                        <div class="day-routine" data-routine-id="lunes-superior" data-level="intermedio">
+                            <h4>Lunes - Tren Superior</h4>
+                            <p class="day-summary">Flexiones, fondos, plancha lateral y remo</p>
+                            <button class="complete-routine-btn" data-routine-id="lunes-superior" data-level="intermedio">
+                                <i class="fas fa-check-circle"></i> Marcar como completada
+                            </button>
+                        </div>
+                        
+                        <div class="day-routine" data-routine-id="miercoles-inferior" data-level="intermedio">
+                            <h4>Miércoles - Tren Inferior</h4>
+                            <p class="day-summary">Sentadillas, zancadas, elevaciones y puentes</p>
+                            <button class="complete-routine-btn" data-routine-id="miercoles-inferior" data-level="intermedio">
+                                <i class="fas fa-check-circle"></i> Marcar como completada
+                            </button>
+                        </div>
+                        
+                        <div class="day-routine" data-routine-id="viernes-cardio-core" data-level="intermedio">
+                            <h4>Viernes - Cardio y Core</h4>
+                            <p class="day-summary">HIIT, abdominales, plancha y mountain climbers</p>
+                            <button class="complete-routine-btn" data-routine-id="viernes-cardio-core" data-level="intermedio">
+                                <i class="fas fa-check-circle"></i> Marcar como completada
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="tips">
+                        <strong><i class="fas fa-lightbulb"></i> Consejos:</strong>
+                        <p>Aumenta gradualmente la intensidad. Combina ejercicios de fuerza con cardio para mejores resultados. Descansa 1-2 días entre sesiones intensas.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Nivel Avanzado -->
+        <section class="routine-section" id="avanzado">
+            <div class="section-header">
+                <h2 class="section-title">
+                    <i class="fas fa-bolt"></i> 
+                    Avanzado
+                </h2>
+                <p class="section-subtitle">Rutinas intensas para atletas experimentados. Desafía tus límites con entrenamientos de alta intensidad que combinan fuerza, resistencia y explosividad. Estas rutinas requieren excelente técnica y condición física. Escucha a tu cuerpo y prioriza la recuperación para evitar lesiones.</p>
+            </div>
+            
+            <div class="routine-card">
+                <div class="image-container">
+                    <img src="imgs/avanzado.png" alt="Ejercicios avanzados" class="routine-image">
+                    <img src="imgs/avanzado2.png" alt="Ejercicios avanzados" class="routine-image">
+                </div>
+                
+                <div class="routine-content">
+                    <h3>Rutina Semanal Avanzada</h3>
+                    <div class="routine-details">
+                        <div class="day-routine" data-routine-id="lunes-push" data-level="avanzado">
+                            <h4>Lunes - Push (Empuje)</h4>
+                            <p class="day-summary">Flexiones explosivas, fondos avanzados y cardio HIIT</p>
+                            <button class="complete-routine-btn" data-routine-id="lunes-push" data-level="avanzado">
+                                <i class="fas fa-check-circle"></i> Marcar como completada
+                            </button>
+                        </div>
+                        
+                        <div class="day-routine" data-routine-id="miercoles-pull" data-level="avanzado">
+                            <h4>Miércoles - Pull (Jalón)</h4>
+                            <p class="day-summary">Dominadas, remo invertido, superman y plancha lateral</p>
+                            <button class="complete-routine-btn" data-routine-id="miercoles-pull" data-level="avanzado">
+                                <i class="fas fa-check-circle"></i> Marcar como completada
+                            </button>
+                        </div>
+                        
+                        <div class="day-routine" data-routine-id="viernes-legs-core" data-level="avanzado">
+                            <h4>Viernes - Legs (Piernas) y Core</h4>
+                            <p class="day-summary">Sentadillas con salto, zancadas explosivas y core intenso</p>
+                            <button class="complete-routine-btn" data-routine-id="viernes-legs-core" data-level="avanzado">
+                                <i class="fas fa-check-circle"></i> Marcar como completada
+                            </button>
+                        </div>
+                        
+                        <div class="day-routine" data-routine-id="sabado-fullbody" data-level="avanzado">
+                            <h4>Sábado - Full Body</h4>
+                            <p class="day-summary">Circuito completo con burpees, mountain climbers y más</p>
+                            <button class="complete-routine-btn" data-routine-id="sabado-fullbody" data-level="avanzado">
+                                <i class="fas fa-check-circle"></i> Marcar como completada
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="tips">
+                        <strong><i class="fas fa-lightbulb"></i> Consejos:</strong>
+                        <p>Mantén la forma correcta incluso con alta intensidad. Hidrátate bien y asegúrate de tener una nutrición adecuada. Escucha a tu cuerpo para evitar lesiones.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p><i class="fas fa-heart"></i> Mantente activo, mantente saludable</p>
+            <p class="footer-note"><i class="fas fa-info-circle"></i> Recuerda consultar con un profesional antes de comenzar cualquier rutina nueva</p>
+            
+            <!-- Nuevas funcionalidades -->
+            <div class="footer-actions">
+                <button onclick="startRestTimer(60)" class="footer-action-btn" title="Iniciar temporizador de descanso">
+                    <i class="fas fa-stopwatch"></i> Temporizador
+                </button>
+                <button onclick="shareProgress()" class="footer-action-btn" title="Compartir mi progreso">
+                    <i class="fas fa-share-alt"></i> Compartir
+                </button>
+                <button onclick="exportProgress()" class="footer-action-btn" title="Exportar mi progreso">
+                    <i class="fas fa-download"></i> Exportar
+                </button>
+                <button onclick="requestNotificationPermission()" class="footer-action-btn" title="Activar recordatorios">
+                    <i class="fas fa-bell"></i> Recordatorios
+                </button>
+            </div>
+            
+            <div class="footer-links">
+                <a href="#principiante" class="footer-link">Principiante</a>
+                <span class="footer-separator">•</span>
+                <a href="#intermedio" class="footer-link">Intermedio</a>
+                <span class="footer-separator">•</span>
+                <a href="#avanzado" class="footer-link">Avanzado</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal de Login/Registro -->
+    <div id="authModal" class="modal auth-modal">
+        <div class="modal-content auth-modal-content">
+            <div class="modal-header">
+                <h2 id="authModalTitle">Iniciar Sesión</h2>
+                <span class="close auth-modal-close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <!-- Formulario de Login -->
+                <form id="loginForm" class="auth-form">
+                    <div class="form-group">
+                        <label for="loginEmail">
+                            <i class="fas fa-envelope"></i>
+                            Correo Electrónico
+                        </label>
+                        <input type="email" id="loginEmail" name="email" required placeholder="tu@email.com">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="loginPassword">
+                            <i class="fas fa-lock"></i>
+                            Contraseña
+                        </label>
+                        <input type="password" id="loginPassword" name="password" required placeholder="••••••••">
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary btn-full">
+                        <i class="fas fa-sign-in-alt"></i>
+                        Iniciar Sesión
+                    </button>
+                    
+                    <div class="auth-switch">
+                        <p>¿No tienes cuenta? <a href="#" id="showRegisterForm">Regístrate aquí</a></p>
+                    </div>
+                </form>
+                
+                <!-- Formulario de Registro -->
+                <form id="registerForm" class="auth-form" style="display: none;">
+                    <!-- Paso 1: Información Básica -->
+                    <div class="register-step" id="registerStep1">
+                        <div class="step-indicator">
+                            <span class="step-number active">1</span>
+                            <span class="step-number">2</span>
+                            <span class="step-number">3</span>
+                        </div>
+                        <h4 class="step-title">Información Básica</h4>
+                        
+                        <div class="form-group">
+                            <label for="registerName">
+                                <i class="fas fa-user"></i>
+                                Nombre Completo
+                            </label>
+                            <input type="text" id="registerName" name="nombre" required placeholder="Tu nombre">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="registerEmail">
+                                <i class="fas fa-envelope"></i>
+                                Correo Electrónico
+                            </label>
+                            <input type="email" id="registerEmail" name="email" required placeholder="tu@email.com">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="registerPassword">
+                                <i class="fas fa-lock"></i>
+                                Contraseña
+                            </label>
+                            <input type="password" id="registerPassword" name="password" required placeholder="Mínimo 6 caracteres">
+                        </div>
+                        
+                        <button type="button" class="btn btn-primary btn-full" id="nextStep1">
+                            Siguiente <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                    
+                    <!-- Paso 2: Datos Físicos -->
+                    <div class="register-step" id="registerStep2" style="display: none;">
+                        <div class="step-indicator">
+                            <span class="step-number completed">1</span>
+                            <span class="step-number active">2</span>
+                            <span class="step-number">3</span>
+                        </div>
+                        <h4 class="step-title">Datos Físicos</h4>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="registerAge">
+                                    <i class="fas fa-birthday-cake"></i>
+                                    Edad
+                                </label>
+                                <input type="number" id="registerAge" name="edad" required placeholder="Años" min="13" max="100">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="registerGender">
+                                    <i class="fas fa-venus-mars"></i>
+                                    Género
+                                </label>
+                                <select id="registerGender" name="genero" required>
+                                    <option value="">Seleccionar</option>
+                                    <option value="masculino">Masculino</option>
+                                    <option value="femenino">Femenino</option>
+                                    <option value="otro">Otro</option>
+                                    <option value="prefiero_no_decir">Prefiero no decir</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="registerWeight">
+                                    <i class="fas fa-weight"></i>
+                                    Peso Actual (kg)
+                                </label>
+                                <input type="number" id="registerWeight" name="peso" required placeholder="kg" min="30" max="300" step="0.1">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="registerHeight">
+                                    <i class="fas fa-ruler-vertical"></i>
+                                    Altura (cm)
+                                </label>
+                                <input type="number" id="registerHeight" name="altura" required placeholder="cm" min="100" max="250">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="registerTargetWeight">
+                                <i class="fas fa-bullseye"></i>
+                                Peso Objetivo (kg) <span class="optional">(opcional)</span>
+                            </label>
+                            <input type="number" id="registerTargetWeight" name="pesoObjetivo" placeholder="kg" min="30" max="300" step="0.1">
+                        </div>
+                        
+                        <div class="form-buttons">
+                            <button type="button" class="btn btn-secondary" id="prevStep2">
+                                <i class="fas fa-arrow-left"></i> Atrás
+                            </button>
+                            <button type="button" class="btn btn-primary" id="nextStep2">
+                                Siguiente <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Paso 3: Objetivos y Experiencia -->
+                    <div class="register-step" id="registerStep3" style="display: none;">
+                        <div class="step-indicator">
+                            <span class="step-number completed">1</span>
+                            <span class="step-number completed">2</span>
+                            <span class="step-number active">3</span>
+                        </div>
+                        <h4 class="step-title">Objetivos y Experiencia</h4>
+                        
+                        <div class="form-group">
+                            <label for="registerGoal">
+                                <i class="fas fa-target"></i>
+                                ¿Cuál es tu objetivo principal?
+                            </label>
+                            <select id="registerGoal" name="objetivo" required>
+                                <option value="">Seleccionar</option>
+                                <option value="perder_peso">Perder peso</option>
+                                <option value="ganar_musculo">Ganar músculo</option>
+                                <option value="mantener_peso">Mantener peso</option>
+                                <option value="mejorar_resistencia">Mejorar resistencia</option>
+                                <option value="aumentar_flexibilidad">Aumentar flexibilidad</option>
+                                <option value="salud_general">Salud general</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="registerLevel">
+                                <i class="fas fa-chart-line"></i>
+                                Nivel de Fitness
+                            </label>
+                            <select id="registerLevel" name="nivel" required>
+                                <option value="">Seleccionar</option>
+                                <option value="principiante">Principiante</option>
+                                <option value="intermedio">Intermedio</option>
+                                <option value="avanzado">Avanzado</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="registerDays">
+                                    <i class="fas fa-calendar-alt"></i>
+                                    Días/semana
+                                </label>
+                                <select id="registerDays" name="diasDisponibles" required>
+                                    <option value="">Seleccionar</option>
+                                    <option value="1">1 día</option>
+                                    <option value="2">2 días</option>
+                                    <option value="3">3 días</option>
+                                    <option value="4">4 días</option>
+                                    <option value="5">5 días</option>
+                                    <option value="6">6 días</option>
+                                    <option value="7">7 días</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="registerTime">
+                                    <i class="fas fa-clock"></i>
+                                    Tiempo/sesión
+                                </label>
+                                <select id="registerTime" name="tiempoDisponible" required>
+                                    <option value="">Seleccionar</option>
+                                    <option value="15">15 min</option>
+                                    <option value="30">30 min</option>
+                                    <option value="45">45 min</option>
+                                    <option value="60">60 min</option>
+                                    <option value="90">90 min</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-buttons">
+                            <button type="button" class="btn btn-secondary" id="prevStep3">
+                                <i class="fas fa-arrow-left"></i> Atrás
+                            </button>
+                            <button type="submit" class="btn btn-success">
+                                <i class="fas fa-user-plus"></i>
+                                Crear Cuenta
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="auth-switch">
+                        <p>¿Ya tienes cuenta? <a href="#" id="showLoginForm">Inicia sesión aquí</a></p>
+                    </div>
+                </form>
+                
+                <!-- Mensaje de estado -->
+                <div id="authMessage" class="auth-message" style="display: none;"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para completar perfil (para usuarios existentes sin datos) -->
+    <div id="completeProfileModal" class="modal">
+        <div class="modal-content profile-modal-large">
+            <div class="modal-header">
+                <h2>¡Completa tu perfil!</h2>
+                <p style="font-size: 0.9rem; color: #6b7280; margin-top: 8px;">Ayúdanos a personalizar tu experiencia</p>
+            </div>
+            <div class="modal-body">
+                <form id="completeProfileForm" class="auth-form">
+                    <!-- Datos Físicos -->
+                    <h4 class="profile-section-title"><i class="fas fa-heartbeat"></i> Datos Físicos</h4>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="completeAge">
+                                <i class="fas fa-birthday-cake"></i>
+                                Edad
+                            </label>
+                            <input type="number" id="completeAge" name="edad" required min="13" max="100">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="completeGender">
+                                <i class="fas fa-venus-mars"></i>
+                                Género
+                            </label>
+                            <select id="completeGender" name="genero" required>
+                                <option value="">Seleccionar</option>
+                                <option value="masculino">Masculino</option>
+                                <option value="femenino">Femenino</option>
+                                <option value="otro">Otro</option>
+                                <option value="prefiero_no_decir">Prefiero no decir</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="completeWeight">
+                                <i class="fas fa-weight"></i>
+                                Peso Actual (kg)
+                            </label>
+                            <input type="number" id="completeWeight" name="peso" required min="30" max="300" step="0.1">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="completeHeight">
+                                <i class="fas fa-ruler-vertical"></i>
+                                Altura (cm)
+                            </label>
+                            <input type="number" id="completeHeight" name="altura" required min="100" max="250">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="completeTargetWeight">
+                            <i class="fas fa-bullseye"></i>
+                            Peso Objetivo (kg) <span class="optional">(opcional)</span>
+                        </label>
+                        <input type="number" id="completeTargetWeight" name="pesoObjetivo" min="30" max="300" step="0.1">
+                    </div>
+                    
+                    <!-- Objetivos y Preferencias -->
+                    <h4 class="profile-section-title"><i class="fas fa-target"></i> Objetivos y Preferencias</h4>
+                    
+                    <div class="form-group">
+                        <label for="completeGoal">
+                            <i class="fas fa-flag"></i>
+                            Objetivo Principal
+                        </label>
+                        <select id="completeGoal" name="objetivo" required>
+                            <option value="">Seleccionar</option>
+                            <option value="perder_peso">Perder peso</option>
+                            <option value="ganar_musculo">Ganar músculo</option>
+                            <option value="mantener_peso">Mantener peso</option>
+                            <option value="mejorar_resistencia">Mejorar resistencia</option>
+                            <option value="aumentar_flexibilidad">Aumentar flexibilidad</option>
+                            <option value="salud_general">Salud general</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="completeDays">
+                                <i class="fas fa-calendar-alt"></i>
+                                Días Disponibles/Semana
+                            </label>
+                            <select id="completeDays" name="diasDisponibles" required>
+                                <option value="">Seleccionar</option>
+                                <option value="1">1 día</option>
+                                <option value="2">2 días</option>
+                                <option value="3">3 días</option>
+                                <option value="4">4 días</option>
+                                <option value="5">5 días</option>
+                                <option value="6">6 días</option>
+                                <option value="7">7 días</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="completeTime">
+                                <i class="fas fa-clock"></i>
+                                Tiempo por Sesión
+                            </label>
+                            <select id="completeTime" name="tiempoDisponible" required>
+                                <option value="">Seleccionar</option>
+                                <option value="15">15 min</option>
+                                <option value="30">30 min</option>
+                                <option value="45">45 min</option>
+                                <option value="60">60 min</option>
+                                <option value="90">90 min</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-success btn-full">
+                        <i class="fas fa-check"></i>
+                        Completar Perfil
+                    </button>
+                    
+                    <button type="button" class="btn btn-secondary btn-full" id="skipCompleteProfile" style="margin-top: 10px;">
+                        Omitir por ahora
+                    </button>
+                </form>
+                
+                <div id="completeProfileMessage" class="auth-message" style="display: none;"></div>
+                
+                <p style="text-align: center; margin-top: 15px; font-size: 0.85rem; color: #6b7280;">
+                    ¿Problemas con tu sesión? <a href="#" id="logoutFromComplete" style="color: #667eea;">Cerrar sesión</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para mostrar ejercicios (original) -->
+    <div id="exerciseModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Ejercicios</h2>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- Contenido dinámico de ejercicios -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para cuestionario inicial (original) -->
+    <div id="questionnaireModal" class="modal questionnaire-modal">
+        <div class="modal-content questionnaire-content">
+            <div class="modal-header">
+                <h2>¡Bienvenido! Vamos a encontrar tu nivel ideal</h2>
+            </div>
+            <div class="modal-body">
+                <div id="questionContainer">
+                    <!-- Las preguntas se cargarán dinámicamente -->
+                </div>
+                <div class="questionnaire-buttons">
+                    <button id="prevBtn" class="btn btn-secondary" style="display: none;">Anterior</button>
+                    <button id="nextBtn" class="btn btn-primary">Siguiente</button>
+                    <button id="finishBtn" class="btn btn-success" style="display: none;">Ver mi nivel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para ejercicio individual (original) -->
+    <div id="individualExerciseModal" class="modal individual-exercise-modal">
+        <div class="modal-content individual-exercise-content">
+            <div class="modal-header">
+                <h2 id="individualExerciseTitle">Ejercicio</h2>
+                <span class="close individual-exercise-close">&times;</span>
+            </div>
+            <div class="modal-body" id="individualExerciseBody">
+                <!-- Contenido dinámico del ejercicio individual -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Perfil -->
+    <div id="profileModal" class="modal">
+        <div class="modal-content profile-modal-large">
+            <div class="modal-header">
+                <h2>Mi Perfil</h2>
+                <span class="close profile-modal-close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form id="profileForm" class="auth-form">
+                    <!-- Información Básica -->
+                    <h4 class="profile-section-title"><i class="fas fa-user"></i> Información Básica</h4>
+                    
+                    <div class="form-group">
+                        <label for="profileName">
+                            <i class="fas fa-user"></i>
+                            Nombre Completo
+                        </label>
+                        <input type="text" id="profileName" name="nombre" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="profileEmail">
+                            <i class="fas fa-envelope"></i>
+                            Email
+                        </label>
+                        <input type="email" id="profileEmail" name="email" disabled>
+                    </div>
+                    
+                    <!-- Datos Físicos -->
+                    <h4 class="profile-section-title"><i class="fas fa-heartbeat"></i> Datos Físicos</h4>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="profileAge">
+                                <i class="fas fa-birthday-cake"></i>
+                                Edad
+                            </label>
+                            <input type="number" id="profileAge" name="edad" min="13" max="100">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="profileGender">
+                                <i class="fas fa-venus-mars"></i>
+                                Género
+                            </label>
+                            <select id="profileGender" name="genero">
+                                <option value="">Seleccionar</option>
+                                <option value="masculino">Masculino</option>
+                                <option value="femenino">Femenino</option>
+                                <option value="otro">Otro</option>
+                                <option value="prefiero_no_decir">Prefiero no decir</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="profileWeight">
+                                <i class="fas fa-weight"></i>
+                                Peso Actual (kg)
+                            </label>
+                            <input type="number" id="profileWeight" name="peso" min="30" max="300" step="0.1">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="profileHeight">
+                                <i class="fas fa-ruler-vertical"></i>
+                                Altura (cm)
+                            </label>
+                            <input type="number" id="profileHeight" name="altura" min="100" max="250">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="profileTargetWeight">
+                            <i class="fas fa-bullseye"></i>
+                            Peso Objetivo (kg) <span class="optional">(opcional)</span>
+                        </label>
+                        <input type="number" id="profileTargetWeight" name="pesoObjetivo" min="30" max="300" step="0.1">
+                    </div>
+                    
+                    <!-- Objetivos y Preferencias -->
+                    <h4 class="profile-section-title"><i class="fas fa-target"></i> Objetivos y Preferencias</h4>
+                    
+                    <div class="form-group">
+                        <label for="profileGoal">
+                            <i class="fas fa-flag"></i>
+                            Objetivo Principal
+                        </label>
+                        <select id="profileGoal" name="objetivo">
+                            <option value="">Seleccionar</option>
+                            <option value="perder_peso">Perder peso</option>
+                            <option value="ganar_musculo">Ganar músculo</option>
+                            <option value="mantener_peso">Mantener peso</option>
+                            <option value="mejorar_resistencia">Mejorar resistencia</option>
+                            <option value="aumentar_flexibilidad">Aumentar flexibilidad</option>
+                            <option value="salud_general">Salud general</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="profileLevel">
+                            <i class="fas fa-chart-line"></i>
+                            Nivel de Fitness
+                        </label>
+                        <select id="profileLevel" name="nivel">
+                            <option value="principiante">Principiante</option>
+                            <option value="intermedio">Intermedio</option>
+                            <option value="avanzado">Avanzado</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="profileDays">
+                                <i class="fas fa-calendar-alt"></i>
+                                Días Disponibles/Semana
+                            </label>
+                            <select id="profileDays" name="diasDisponibles">
+                                <option value="">Seleccionar</option>
+                                <option value="1">1 día</option>
+                                <option value="2">2 días</option>
+                                <option value="3">3 días</option>
+                                <option value="4">4 días</option>
+                                <option value="5">5 días</option>
+                                <option value="6">6 días</option>
+                                <option value="7">7 días</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="profileTime">
+                                <i class="fas fa-clock"></i>
+                                Tiempo por Sesión
+                            </label>
+                            <select id="profileTime" name="tiempoDisponible">
+                                <option value="">Seleccionar</option>
+                                <option value="15">15 min</option>
+                                <option value="30">30 min</option>
+                                <option value="45">45 min</option>
+                                <option value="60">60 min</option>
+                                <option value="90">90 min</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary btn-full">
+                        <i class="fas fa-save"></i>
+                        Guardar Cambios
+                    </button>
+                </form>
+                
+                <!-- Progreso Semanal en Perfil -->
+                <div class="profile-progress-section">
+                    <h4 class="profile-section-title"><i class="fas fa-chart-bar"></i> Progreso Semanal</h4>
+                    
+                    <div class="profile-progress-grid">
+                        <div class="profile-stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-dumbbell"></i>
+                            </div>
+                            <div class="stat-info">
+                                <div class="stat-label">Rutinas Completadas</div>
+                                <div class="stat-value">
+                                    <span id="profileRutinasCompletadas">0</span> / <span id="profileRutinasObjetivo">3</span>
+                                </div>
+                                <div class="stat-progress-bar">
+                                    <div class="stat-progress-fill" id="profileRutinasProgress" style="width: 0%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="profile-stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="stat-info">
+                                <div class="stat-label">Minutos Entrenados</div>
+                                <div class="stat-value">
+                                    <span id="profileMinutosCompletados">0</span> / <span id="profileMinutosObjetivo">150</span>
+                                </div>
+                                <div class="stat-progress-bar">
+                                    <div class="stat-progress-fill" id="profileMinutosProgress" style="width: 0%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="profile-stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-fire"></i>
+                            </div>
+                            <div class="stat-info">
+                                <div class="stat-label">Racha Actual</div>
+                                <div class="stat-value">
+                                    <span id="profileRachaActual">0</span> <span id="profileRachaDias">días</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="profile-stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-trophy"></i>
+                            </div>
+                            <div class="stat-info">
+                                <div class="stat-label">Progreso General</div>
+                                <div class="stat-value">
+                                    <span id="profileProgresoGeneral">0</span>%
+                                </div>
+                                <div class="stat-progress-bar">
+                                    <div class="stat-progress-fill" id="profileProgresoProgress" style="width: 0%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="profileMessage" class="auth-message" style="display: none;"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Progreso -->
+    <div id="progressModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Mi Progreso</h2>
+                <span class="close progress-modal-close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div id="progressContent">
+                    <!-- Datos Personales del Usuario -->
+                    <div class="user-data-section">
+                        <h3><i class="fas fa-user-circle"></i> Mis Datos</h3>
+                        <div class="user-data-grid">
+                            <div class="data-card">
+                                <div class="data-icon"><i class="fas fa-birthday-cake"></i></div>
+                                <div class="data-info">
+                                    <div class="data-label">Edad</div>
+                                    <div class="data-value" id="userData-edad">-</div>
+                                </div>
+                            </div>
+                            
+                            <div class="data-card">
+                                <div class="data-icon"><i class="fas fa-weight"></i></div>
+                                <div class="data-info">
+                                    <div class="data-label">Peso Actual</div>
+                                    <div class="data-value" id="userData-peso">-</div>
+                                </div>
+                            </div>
+                            
+                            <div class="data-card">
+                                <div class="data-icon"><i class="fas fa-ruler-vertical"></i></div>
+                                <div class="data-info">
+                                    <div class="data-label">Altura</div>
+                                    <div class="data-value" id="userData-altura">-</div>
+                                </div>
+                            </div>
+                            
+                            <div class="data-card">
+                                <div class="data-icon"><i class="fas fa-bullseye"></i></div>
+                                <div class="data-info">
+                                    <div class="data-label">Peso Objetivo</div>
+                                    <div class="data-value" id="userData-pesoObjetivo">-</div>
+                                </div>
+                            </div>
+                            
+                            <div class="data-card">
+                                <div class="data-icon"><i class="fas fa-fire"></i></div>
+                                <div class="data-info">
+                                    <div class="data-label">Calorías Recomendadas</div>
+                                    <div class="data-value" id="userData-calorias">-</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="user-goals">
+                            <div class="goal-item">
+                                <i class="fas fa-target"></i>
+                                <span><strong>Objetivo:</strong> <span id="userData-objetivo">-</span></span>
+                            </div>
+                            <div class="goal-item">
+                                <i class="fas fa-chart-line"></i>
+                                <span><strong>Nivel:</strong> <span id="userData-nivel">-</span></span>
+                            </div>
+                            <div class="goal-item">
+                                <i class="fas fa-calendar-alt"></i>
+                                <span><strong>Disponibilidad:</strong> <span id="userData-disponibilidad">-</span></span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="progress-stats">
+                        <div class="stat-card">
+                            <div class="stat-icon"><i class="fas fa-dumbbell"></i></div>
+                            <div class="stat-info">
+                                <div class="stat-value" id="totalRoutines">0</div>
+                                <div class="stat-label">Rutinas Completadas</div>
+                            </div>
+                        </div>
+                        
+                        <div class="stat-card">
+                            <div class="stat-icon"><i class="fas fa-fire"></i></div>
+                            <div class="stat-info">
+                                <div class="stat-value"><span id="currentStreak">0</span> <span id="currentStreakLabel">días</span></div>
+                                <div class="stat-label">Racha Actual</div>
+                            </div>
+                        </div>
+                        
+                        <div class="stat-card">
+                            <div class="stat-icon"><i class="fas fa-clock"></i></div>
+                            <div class="stat-info">
+                                <div class="stat-value" id="totalMinutes">0</div>
+                                <div class="stat-label">Minutos Entrenados</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="progress-section">
+                        <h3>Progreso Semanal</h3>
+                        <div class="progress-bar-visual">
+                            <div class="progress-label">
+                                <span>Rutinas</span>
+                                <span id="weeklyRoutinesText">0/3</span>
+                            </div>
+                            <div class="progress-track">
+                                <div class="progress-fill" id="weeklyRoutinesFill" style="width: 0%"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="progress-bar-visual">
+                            <div class="progress-label">
+                                <span>Minutos</span>
+                                <span id="weeklyMinutesText">0/150</span>
+                            </div>
+                            <div class="progress-track">
+                                <div class="progress-fill" id="weeklyMinutesFill" style="width: 0%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="config.js"></script>
+    <script src="app.js"></script>
+    <script src="auth.js"></script>
+</body>
+</html>
