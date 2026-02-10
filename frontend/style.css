@@ -1153,62 +1153,62 @@ select option:checked {
     }
     
     header.hero-banner {
-        padding: 30px 0 30px 0;
-        min-height: 650px; /* Altura optimizada */
+        padding: 25px 0 25px 0;
+        min-height: 580px; /* Altura más compacta */
         height: auto;
     }
     
     .banner-overlay {
-        min-height: 650px;
+        min-height: 580px;
         height: auto;
     }
     
     .hero-content {
-        padding-top: 10px;
-        padding-bottom: 10px;
+        padding-top: 5px;
+        padding-bottom: 5px;
     }
     
     header h1 {
-        font-size: 1.6rem;
+        font-size: 1.5rem;
         line-height: 1.2;
-        margin-bottom: 8px;
+        margin-bottom: 6px;
     }
     
     .hero-subtitle {
-        font-size: 0.85rem;
-        margin-bottom: 18px;
-        line-height: 1.4;
+        font-size: 0.78rem;
+        margin-bottom: 14px;
+        line-height: 1.3;
     }
     
     .level-cards {
-        gap: 12px;
-        margin-top: 18px;
+        gap: 10px;
+        margin-top: 14px;
     }
     
     .level-card {
-        padding: 16px 14px;
-        gap: 14px;
-        min-height: 85px;
-        border-radius: 12px;
+        padding: 14px 12px;
+        gap: 12px;
+        min-height: 78px;
+        border-radius: 10px;
     }
     
     .level-card-icon {
-        width: 55px;
-        height: 55px;
+        width: 50px;
+        height: 50px;
     }
     
     .level-card-icon i {
-        font-size: 1.6rem;
+        font-size: 1.5rem;
     }
     
     .level-card h3 {
-        font-size: 1.05rem;
+        font-size: 1rem;
         margin-bottom: 2px;
     }
     
     .level-card p {
-        font-size: 0.8rem;
-        line-height: 1.3;
+        font-size: 0.75rem;
+        line-height: 1.2;
     }
     
     .routine-card {
