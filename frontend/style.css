@@ -929,15 +929,22 @@ select option:checked {
     }
     
     header.hero-banner {
-        padding: 50px 0;
-        min-height: 650px; /* Altura fija para mostrar todo el contenido */
+        padding: 40px 0 40px 0;
+        min-height: 750px; /* Altura aumentada para mostrar todo */
+        height: auto; /* Permitir que crezca si es necesario */
+    }
+    
+    .banner-overlay {
+        min-height: 750px;
+        height: auto;
     }
     
     .hero-content {
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
-        min-height: 550px;
+        padding-top: 20px;
+        padding-bottom: 20px;
     }
     
     header.hero-banner::before {
@@ -945,54 +952,55 @@ select option:checked {
     }
     
     header h1 {
-        font-size: 2.2rem;
-        margin-bottom: 12px;
+        font-size: 2rem;
+        margin-bottom: 10px;
     }
     
     header h1 i {
         margin-right: 12px;
     }
     
-    .subtitle {
-        font-size: 1.1rem;
-        margin-bottom: 32px;
+    .hero-subtitle {
+        font-size: 1rem;
+        margin-bottom: 24px;
+        line-height: 1.5;
     }
     
     .level-cards {
         grid-template-columns: 1fr;
-        gap: 16px;
-        margin-top: 32px;
+        gap: 14px;
+        margin-top: 24px;
         max-width: 100%;
         margin-bottom: 0;
     }
     
     .level-card {
-        padding: 24px 20px;
+        padding: 20px 18px;
         display: flex;
         align-items: center;
-        gap: 20px;
+        gap: 18px;
         text-align: left;
-        min-height: 110px;
+        min-height: 100px;
     }
     
     .level-card-icon {
-        width: 70px;
-        height: 70px;
+        width: 65px;
+        height: 65px;
         margin: 0;
         flex-shrink: 0;
     }
     
     .level-card-icon i {
-        font-size: 2rem;
+        font-size: 1.9rem;
     }
     
     .level-card h3 {
-        font-size: 1.3rem;
+        font-size: 1.25rem;
         margin-bottom: 4px;
     }
     
     .level-card p {
-        font-size: 0.95rem;
+        font-size: 0.9rem;
         margin: 0;
     }
     
@@ -1145,45 +1153,58 @@ select option:checked {
     }
     
     header.hero-banner {
-        padding: 40px 0;
-        min-height: 600px; /* Altura fija para móviles pequeños */
+        padding: 35px 0 35px 0;
+        min-height: 700px; /* Altura aumentada */
+        height: auto;
+    }
+    
+    .banner-overlay {
+        min-height: 700px;
+        height: auto;
     }
     
     .hero-content {
-        min-height: 500px;
+        padding-top: 15px;
+        padding-bottom: 15px;
     }
     
     header h1 {
-        font-size: 1.8rem;
+        font-size: 1.75rem;
         line-height: 1.2;
+        margin-bottom: 8px;
     }
     
-    .subtitle {
-        font-size: 0.95rem;
-        margin-bottom: 28px;
+    .hero-subtitle {
+        font-size: 0.9rem;
+        margin-bottom: 20px;
+    }
+    
+    .level-cards {
+        gap: 12px;
+        margin-top: 20px;
     }
     
     .level-card {
-        padding: 18px 16px;
-        gap: 16px;
-        min-height: 95px;
+        padding: 16px 14px;
+        gap: 14px;
+        min-height: 90px;
     }
     
     .level-card-icon {
-        width: 60px;
-        height: 60px;
+        width: 58px;
+        height: 58px;
     }
     
     .level-card-icon i {
-        font-size: 1.75rem;
+        font-size: 1.7rem;
     }
     
     .level-card h3 {
-        font-size: 1.15rem;
+        font-size: 1.1rem;
     }
     
     .level-card p {
-        font-size: 0.85rem;
+        font-size: 0.82rem;
     }
     
     .routine-card {
