@@ -1,6 +1,6 @@
 // Frontend Configuration
 const CONFIG = {
-    API_URL: 'TU_URL_DE_RAILWAY_AQUI/api',  // Actualiza esto cuando tengas la URL de Railway
+    API_URL: 'https://fitness-app-backend-36d6.onrender.com/api',  // Backend desplegado en Render
     ENDPOINTS: {
         AUTH: {
             LOGIN: '/auth/login',
