@@ -13,16 +13,8 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // El botón de cuestionario se maneja completamente en auth.js a través de updateAuthUI()
-    // No necesitamos lógica adicional aquí
-
-    // Show questionnaire on first visit (solo si no está autenticado y no ha completado el quiz)
-    const isAuthenticated = window.authSystem && window.authSystem.isAuthenticated();
-    if (!localStorage.getItem('fitnessLevelAssessed') && !isAuthenticated) {
-        console.log('First visit detected, showing questionnaire...');
-        setTimeout(() => {
-            showQuestionnaire();
-        }, 1500);
-    }
+    // No mostramos el cuestionario automáticamente, solo cuando el usuario inicie sesión
+    // y haga clic en "Evaluar Nivel"
     
     // Update active nav link on scroll
     const sections = document.querySelectorAll('.routine-section');

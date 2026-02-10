@@ -978,6 +978,15 @@
     overflow-y: auto;
 }
 
+/* Asegurar que el modal de perfil esté por encima de todo */
+#profileModal {
+    z-index: 3000 !important;
+}
+
+#profileModal .modal-content {
+    z-index: 3001 !important;
+}
+
 .profile-section-title {
     color: #667eea;
     font-size: 1.1rem;
