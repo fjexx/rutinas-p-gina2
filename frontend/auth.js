@@ -467,13 +467,10 @@ function updateAuthUI() {
         if (userMenuContainer) userMenuContainer.style.display = 'block';
         if (userNameDisplay) userNameDisplay.textContent = currentUser.nombre;
         
-        // Verificar y ocultar botón de cuestionario si ya lo completó
+        // Siempre mostrar botón de cuestionario para usuarios autenticados
+        // Permite re-evaluar su nivel cuando quieran
         if (retakeQuizBtnContainer) {
-            if (currentUser.cuestionarioCompletado === true) {
-                retakeQuizBtnContainer.classList.add('hidden');
-            } else {
-                retakeQuizBtnContainer.classList.remove('hidden');
-            }
+            retakeQuizBtnContainer.classList.remove('hidden');
         }
         
         // Reset progress bar closed state and show it
@@ -490,14 +487,9 @@ function updateAuthUI() {
         if (loginNavBtn) loginNavBtn.style.display = 'block';
         if (userMenuContainer) userMenuContainer.style.display = 'none';
         
-        // Mostrar botón de cuestionario para usuarios no autenticados
+        // Ocultar botón de cuestionario para usuarios no autenticados
         if (retakeQuizBtnContainer) {
-            const completedQuiz = localStorage.getItem('quizCompleted') === 'true';
-            if (completedQuiz) {
-                retakeQuizBtnContainer.classList.add('hidden');
-            } else {
-                retakeQuizBtnContainer.classList.remove('hidden');
-            }
+            retakeQuizBtnContainer.classList.add('hidden');
         }
         
         // Hide progress bar
