@@ -690,6 +690,31 @@
     .user-dropdown-menu {
         right: -10px;
     }
+    
+    /* Hacer que el dropdown sea visible en el menú móvil */
+    .nav-menu .user-dropdown {
+        position: static;
+    }
+    
+    .nav-menu .user-dropdown-menu {
+        position: relative;
+        top: 0;
+        right: 0;
+        left: 0;
+        margin: 8px 16px;
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease, padding 0.3s ease;
+        padding: 0;
+    }
+    
+    .nav-menu .user-dropdown.active .user-dropdown-menu {
+        max-height: 300px;
+        padding: 8px 0;
+    }
 
     .auth-modal-content {
         width: 95%;

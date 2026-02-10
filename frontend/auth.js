@@ -177,23 +177,6 @@ function setupAuthEventListeners() {
             e.preventDefault();
             e.stopPropagation();
             userDropdown.classList.toggle('active');
-            
-            // Scroll automático hacia abajo cuando se abre el menú en móvil
-            if (userDropdown.classList.contains('active') && window.innerWidth <= 768) {
-                setTimeout(() => {
-                    const dropdownMenu = document.querySelector('.user-dropdown-menu');
-                    if (dropdownMenu) {
-                        const rect = dropdownMenu.getBoundingClientRect();
-                        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-                        const targetPosition = rect.top + scrollTop - 80; // 80px de offset para el navbar
-                        
-                        window.scrollTo({
-                            top: targetPosition,
-                            behavior: 'smooth'
-                        });
-                    }
-                }, 100); // Pequeño delay para que el menú se abra primero
-            }
         });
 
         // Close dropdown when clicking outside
