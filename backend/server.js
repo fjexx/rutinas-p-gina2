@@ -15,8 +15,10 @@ const app = express();
 
 // Middleware
 app.use(cors({
-    origin: '*', // Permitir todas las origenes para desarrollo
-    credentials: true
+    origin: true, // Permitir el origen de la petición
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization']
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
