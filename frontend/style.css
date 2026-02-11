@@ -826,7 +826,32 @@ main {
     color: var(--text-medium);
     font-size: 0.95rem;
     font-weight: 400;
+    margin: 0 0 8px 0;
+}
+
+.lead-author {
+    color: var(--warning-color);
+    font-weight: 600;
+    text-shadow: 0 0 10px rgba(251, 191, 36, 0.3);
+}
+
+.developer-note {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--primary-color);
+    font-size: 0.85rem;
+    font-weight: 500;
     margin: 0;
+    padding: 6px 12px;
+    background: rgba(129, 140, 248, 0.1);
+    border-radius: 6px;
+    border: 1px solid rgba(129, 140, 248, 0.2);
+}
+
+.developer-note i {
+    font-size: 0.8rem;
+    color: var(--primary-light);
 }
 
 .authors-badge {
