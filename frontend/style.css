@@ -830,28 +830,28 @@ main {
 }
 
 .lead-author {
-    color: var(--warning-color);
-    font-weight: 600;
-    text-shadow: 0 0 10px rgba(251, 191, 36, 0.3);
+    color: var(--warning-color) !important;
+    font-weight: 600 !important;
+    text-shadow: 0 0 10px rgba(251, 191, 36, 0.3) !important;
 }
 
 .developer-note {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    color: var(--primary-color);
-    font-size: 0.85rem;
-    font-weight: 500;
-    margin: 0;
-    padding: 6px 12px;
-    background: rgba(129, 140, 248, 0.1);
-    border-radius: 6px;
-    border: 1px solid rgba(129, 140, 248, 0.2);
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    color: var(--primary-color) !important;
+    font-size: 0.85rem !important;
+    font-weight: 500 !important;
+    margin: 0 !important;
+    padding: 6px 12px !important;
+    background: rgba(129, 140, 248, 0.1) !important;
+    border-radius: 6px !important;
+    border: 1px solid rgba(129, 140, 248, 0.2) !important;
 }
 
 .developer-note i {
-    font-size: 0.8rem;
-    color: var(--primary-light);
+    font-size: 0.8rem !important;
+    color: var(--primary-light) !important;
 }
 
 .authors-badge {
