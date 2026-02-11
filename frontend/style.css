@@ -777,6 +777,8 @@ main {
     margin-top: 64px;
     border-top: 1px solid var(--border-color);
     border-bottom: 1px solid var(--border-color);
+    position: relative;
+    z-index: 1;
 }
 
 .authors-card {
