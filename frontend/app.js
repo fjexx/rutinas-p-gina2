@@ -318,7 +318,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     console.log('💪 PowerRoutine - Sistema cargado correctamente');
-    console.log('🎯 Versión 2.0 - Desarrollado por Franklin Ordóñez, Duván Punina y Joseph Alume');
+    console.log('🎯 Versión 2.0 - Desarrollado por Franklin Ordóñez');
     
     // Scroll to top button
     const scrollBtn = document.createElement('button');

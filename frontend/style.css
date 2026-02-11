@@ -838,81 +838,74 @@ main {
 .lead-developer {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 12px;
     margin-bottom: 12px;
-    padding: 12px 16px;
+    padding: 16px 20px;
     background: linear-gradient(135deg, rgba(251, 191, 36, 0.15) 0%, rgba(245, 158, 11, 0.15) 100%);
-    border-radius: 10px;
-    border-left: 3px solid var(--warning-color);
+    border-radius: 12px;
+    border-left: 4px solid var(--warning-color);
 }
 
 .lead-developer i {
     color: var(--warning-color);
-    font-size: 1rem;
+    font-size: 1.5rem;
+    flex-shrink: 0;
     animation: starPulse 2s ease-in-out infinite;
 }
 
 @keyframes starPulse {
     0%, 100% {
-        transform: scale(1);
+        transform: scale(1) rotate(0deg);
         filter: drop-shadow(0 0 3px var(--warning-color));
     }
     50% {
-        transform: scale(1.2);
-        filter: drop-shadow(0 0 8px var(--warning-color));
+        transform: scale(1.2) rotate(180deg);
+        filter: drop-shadow(0 0 10px var(--warning-color));
     }
+}
+
+.developer-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
 }
 
 .developer-label {
     color: var(--text-medium);
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 .developer-name {
     color: var(--warning-color);
-    font-size: 1.125rem;
+    font-size: 1.5rem;
     font-weight: 700;
     letter-spacing: -0.025em;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-.team-members {
+.project-note {
     display: flex;
     align-items: center;
     gap: 8px;
-    flex-wrap: wrap;
-    padding: 8px 16px;
+    padding: 10px 16px;
     background: rgba(255, 255, 255, 0.03);
     border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.team-label {
+.project-note i {
+    color: var(--primary-color);
+    font-size: 0.9rem;
+}
+
+.project-note span {
     color: var(--text-medium);
     font-size: 0.9rem;
-    font-weight: 500;
-}
-
-.members-list {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    flex-wrap: wrap;
-}
-
-.member-name {
-    color: var(--text-dark);
-    font-size: 1rem;
-    font-weight: 500;
-    transition: all 0.3s ease;
-}
-
-.authors-card:hover .member-name {
-    color: var(--primary-light);
-}
-
-.member-separator {
-    color: var(--text-light);
-    font-size: 0.875rem;
+    font-weight: 400;
+    font-style: italic;
 }
 
 .authors-badge {
@@ -978,10 +971,17 @@ main {
     
     .lead-developer {
         justify-content: center;
+        flex-direction: column;
+        text-align: center;
     }
     
-    .team-members {
+    .developer-info {
+        align-items: center;
+    }
+    
+    .project-note {
         justify-content: center;
+        text-align: center;
     }
     
     .authors-badge {
@@ -1017,37 +1017,29 @@ main {
     }
     
     .lead-developer {
+        padding: 12px 16px;
+    }
+    
+    .lead-developer i {
+        font-size: 1.3rem;
+    }
+    
+    .developer-label {
+        font-size: 0.8rem;
+    }
+    
+    .developer-name {
+        font-size: 1.25rem;
+    }
+    
+    .project-note {
         flex-direction: column;
-        text-align: center;
         gap: 6px;
         padding: 10px 12px;
     }
     
-    .developer-label {
+    .project-note span {
         font-size: 0.85rem;
-    }
-    
-    .developer-name {
-        font-size: 1rem;
-    }
-    
-    .team-members {
-        flex-direction: column;
-        gap: 6px;
-        padding: 8px 12px;
-    }
-    
-    .members-list {
-        flex-direction: column;
-        gap: 4px;
-    }
-    
-    .member-separator {
-        display: none;
-    }
-    
-    .member-name {
-        font-size: 0.9rem;
     }
     
     .badge-grade {
