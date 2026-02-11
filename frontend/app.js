@@ -115,25 +115,68 @@ document.addEventListener('DOMContentLoaded', function() {
     const tipsElements = document.querySelectorAll('.tips');
     
     // Create notification sound using Web Audio API
-    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    let audioContext = null;
+    
+    // Initialize audio context on first user interaction
+    function initAudioContext() {
+        if (!audioContext) {
+            audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        }
+        return audioContext;
+    }
     
     function playNotificationSound() {
         try {
-            const oscillator = audioContext.createOscillator();
-            const gainNode = audioContext.createGain();
+            const ctx = initAudioContext();
+            
+            // Resume context if suspended (required by browsers)
+            if (ctx.state === 'suspended') {
+                ctx.resume();
+            }
+            
+            const oscillator = ctx.createOscillator();
+            const gainNode = ctx.createGain();
             
             oscillator.connect(gainNode);
-            gainNode.connect(audioContext.destination);
+            gainNode.connect(ctx.destination);
             
             // Pleasant notification sound (two tones)
-            oscillator.frequency.setValueAtTime(800, audioContext.currentTime);
-            oscillator.frequency.setValueAtTime(1000, audioContext.currentTime + 0.1);
+            oscillator.frequency.setValueAtTime(800, ctx.currentTime);
+            oscillator.frequency.setValueAtTime(1000, ctx.currentTime + 0.08);
             
-            gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
-            gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3);
+            gainNode.gain.setValueAtTime(0.25, ctx.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.25);
             
-            oscillator.start(audioContext.currentTime);
-            oscillator.stop(audioContext.currentTime + 0.3);
+            oscillator.start(ctx.currentTime);
+            oscillator.stop(ctx.currentTime + 0.25);
+        } catch (error) {
+            console.log('Audio not available:', error);
+        }
+    }
+    
+    function playClickSound() {
+        try {
+            const ctx = initAudioContext();
+            
+            // Resume context if suspended
+            if (ctx.state === 'suspended') {
+                ctx.resume();
+            }
+            
+            const oscillator = ctx.createOscillator();
+            const gainNode = ctx.createGain();
+            
+            oscillator.connect(gainNode);
+            gainNode.connect(ctx.destination);
+            
+            // Quick click sound
+            oscillator.frequency.setValueAtTime(1200, ctx.currentTime);
+            
+            gainNode.gain.setValueAtTime(0.2, ctx.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.1);
+            
+            oscillator.start(ctx.currentTime);
+            oscillator.stop(ctx.currentTime + 0.1);
         } catch (error) {
             console.log('Audio not available:', error);
         }
@@ -164,6 +207,11 @@ document.addEventListener('DOMContentLoaded', function() {
     document.addEventListener('click', function(e) {
         const toggleBtn = e.target.closest('.tips-toggle-btn');
         if (toggleBtn) {
+            e.preventDefault();
+            
+            // Play click sound immediately
+            playClickSound();
+            
             const tipId = toggleBtn.getAttribute('data-tip-id');
             const tipElement = document.querySelector(`.tips[data-tip-id="${tipId}"]`);
             const expandedContent = tipElement.querySelector('.tips-expanded');
@@ -173,9 +221,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 expandedContent.style.display = 'block';
                 toggleText.textContent = 'Leer menos';
                 toggleBtn.classList.add('active');
-                
-                // Play a subtle sound when expanding
-                playNotificationSound();
             } else {
                 expandedContent.style.display = 'none';
                 toggleText.textContent = 'Leer más';

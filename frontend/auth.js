@@ -1020,9 +1020,11 @@ window.addEventListener('click', function(event) {
 // Actualizar barra de progreso global
 async function updateGlobalProgressBar() {
     const progressBar = document.getElementById('progressBar');
+    const miniTrophy = document.getElementById('miniProgressTrophy');
     
     if (!isAuthenticated()) {
         if (progressBar) progressBar.style.display = 'none';
+        if (miniTrophy) miniTrophy.style.display = 'none';
         return;
     }
     
@@ -1030,6 +1032,7 @@ async function updateGlobalProgressBar() {
     if (!authToken) {
         console.log('No hay token disponible para actualizar barra de progreso');
         if (progressBar) progressBar.style.display = 'none';
+        if (miniTrophy) miniTrophy.style.display = 'none';
         return;
     }
     
@@ -1043,6 +1046,7 @@ async function updateGlobalProgressBar() {
         if (!statsResponse.ok) {
             console.warn('Error al obtener estadísticas:', statsResponse.status);
             if (progressBar) progressBar.style.display = 'none';
+            if (miniTrophy) miniTrophy.style.display = 'none';
             return;
         }
         
@@ -1054,6 +1058,7 @@ async function updateGlobalProgressBar() {
         if (!weeklyResponse.ok) {
             console.warn('Error al obtener progreso semanal:', weeklyResponse.status);
             if (progressBar) progressBar.style.display = 'none';
+            if (miniTrophy) miniTrophy.style.display = 'none';
             return;
         }
         
@@ -1083,12 +1088,23 @@ async function updateGlobalProgressBar() {
             const routinesPercent = Math.min(100, (weekly.rutinasCompletadas / objectives.rutinasSemanales) * 100);
             const minutesPercent = Math.min(100, (weekly.minutosEntrenados / objectives.minutosSemanales) * 100);
             const generalProgress = (routinesPercent + minutesPercent) / 2;
+            const progressRounded = Math.round(generalProgress);
             
-            if (progressPercentage) progressPercentage.textContent = Math.round(generalProgress) + '%';
+            if (progressPercentage) progressPercentage.textContent = progressRounded + '%';
             if (progressFill) progressFill.style.width = generalProgress + '%';
             
-            // Mostrar la barra
-            if (progressBar) progressBar.style.display = 'block';
+            // Actualizar mini trofeo badge
+            updateMiniTrophyBadge(progressRounded);
+            
+            // En móvil, mostrar mini trofeo en lugar de la barra completa
+            if (window.innerWidth <= 768) {
+                if (progressBar) progressBar.style.display = 'none';
+                if (miniTrophy) miniTrophy.style.display = 'flex';
+            } else {
+                // En desktop, mostrar la barra completa
+                if (progressBar) progressBar.style.display = 'block';
+                if (miniTrophy) miniTrophy.style.display = 'none';
+            }
             
             console.log('✅ Barra de progreso actualizada correctamente');
         }
@@ -1097,6 +1113,7 @@ async function updateGlobalProgressBar() {
         // Si el error es de autenticación, ya se manejó en makeAuthenticatedRequest
         // Solo ocultar la barra de progreso
         if (progressBar) progressBar.style.display = 'none';
+        if (miniTrophy) miniTrophy.style.display = 'none';
     }
 }
 
@@ -1107,8 +1124,46 @@ if (closeProgressBarBtn) {
         e.preventDefault();
         e.stopPropagation();
         document.getElementById('progressBar').style.display = 'none';
-        localStorage.setItem('progressBarClosed', 'true');
+        
+        // En móvil, mostrar el mini trofeo cuando se cierra
+        if (window.innerWidth <= 768) {
+            const miniTrophy = document.getElementById('miniProgressTrophy');
+            if (miniTrophy) {
+                miniTrophy.style.display = 'flex';
+            }
+        }
     });
+}
+
+// Mini trofeo flotante (móvil)
+const miniProgressTrophy = document.getElementById('miniProgressTrophy');
+if (miniProgressTrophy) {
+    miniProgressTrophy.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        // Mostrar la barra completa
+        const progressBar = document.getElementById('progressBar');
+        if (progressBar) {
+            progressBar.style.display = 'block';
+            
+            // Ocultar el mini trofeo
+            this.style.display = 'none';
+            
+            // Reproducir sonido de clic si está disponible
+            if (typeof playClickSound === 'function') {
+                playClickSound();
+            }
+        }
+    });
+}
+
+// Actualizar el badge del mini trofeo
+function updateMiniTrophyBadge(percentage) {
+    const badge = document.getElementById('miniProgressBadge');
+    if (badge) {
+        badge.textContent = percentage + '%';
+    }
 }
 
 // Reiniciar progreso semanal

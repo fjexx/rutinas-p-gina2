@@ -1042,3 +1042,117 @@
         font-size: 1rem;
     }
 }
+
+/* ========================================
+   MINI TROFEO FLOTANTE (MÓVIL)
+   ======================================== */
+
+.mini-progress-trophy {
+    position: fixed;
+    bottom: 90px;
+    right: 20px;
+    width: 56px;
+    height: 56px;
+    background: linear-gradient(135deg, var(--warning-color) 0%, #f59e0b 100%);
+    border: 3px solid rgba(251, 191, 36, 0.3);
+    border-radius: 50%;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(251, 191, 36, 0.4), 0 0 40px rgba(251, 191, 36, 0.2);
+    z-index: 1500;
+    transition: all 0.3s ease;
+    animation: trophyPulse 2s ease-in-out infinite;
+}
+
+@keyframes trophyPulse {
+    0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 4px 20px rgba(251, 191, 36, 0.4), 0 0 40px rgba(251, 191, 36, 0.2);
+    }
+    50% {
+        transform: scale(1.05);
+        box-shadow: 0 6px 30px rgba(251, 191, 36, 0.6), 0 0 60px rgba(251, 191, 36, 0.3);
+    }
+}
+
+.mini-progress-trophy:hover {
+    transform: scale(1.1) rotate(5deg);
+    box-shadow: 0 8px 30px rgba(251, 191, 36, 0.6), 0 0 60px rgba(251, 191, 36, 0.4);
+}
+
+.mini-progress-trophy:active {
+    transform: scale(0.95);
+}
+
+.mini-progress-trophy i {
+    font-size: 1.5rem;
+    color: white;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+.mini-trophy-badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+    color: white;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 3px 6px;
+    border-radius: 10px;
+    border: 2px solid var(--bg-dark);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    min-width: 32px;
+    text-align: center;
+}
+
+/* Mostrar mini trofeo solo en móvil */
+@media (max-width: 768px) {
+    .mini-progress-trophy {
+        display: flex;
+    }
+    
+    /* Ocultar la barra completa por defecto en móvil */
+    .progress-bar-container {
+        top: 0;
+        right: 0;
+        left: 0;
+        width: 100%;
+        max-width: 100%;
+        border-radius: 0 0 16px 16px;
+        border-top: none;
+        animation: slideInFromTop 0.4s ease;
+    }
+    
+    @keyframes slideInFromTop {
+        from {
+            opacity: 0;
+            transform: translateY(-100%);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+}
+
+@media (max-width: 480px) {
+    .mini-progress-trophy {
+        width: 50px;
+        height: 50px;
+        bottom: 80px;
+        right: 16px;
+    }
+    
+    .mini-progress-trophy i {
+        font-size: 1.3rem;
+    }
+    
+    .mini-trophy-badge {
+        font-size: 0.65rem;
+        padding: 2px 5px;
+        min-width: 28px;
+    }
+}
