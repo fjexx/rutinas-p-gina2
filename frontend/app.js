@@ -190,8 +190,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     entry.target.classList.add('tips-animated');
                     entry.target.style.animationDelay = '0s';
                     
-                    // Play notification sound
-                    playNotificationSound();
+                    // Sonido desactivado para evitar reproducción automática
+                    // playNotificationSound();
                 }, index * 150);
                 observer.unobserve(entry.target);
             }
