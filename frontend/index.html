@@ -441,32 +441,40 @@
 
     <footer>
         <div class="container">
-            <div class="footer-brand">
-                <i class="fas fa-dumbbell"></i>
-                <span>PowerRoutine</span>
-            </div>
-            <p><i class="fas fa-heart"></i> Mantente activo, mantente saludable</p>
-            <p class="footer-note"><i class="fas fa-info-circle"></i> Recuerda consultar con un profesional antes de comenzar cualquier rutina nueva</p>
-            
-            <!-- Nuevas funcionalidades -->
-            <div class="footer-actions">
-                <button onclick="startRestTimer(60)" class="footer-action-btn" title="Iniciar temporizador de descanso">
-                    <i class="fas fa-stopwatch"></i> Temporizador
-                </button>
-                <button onclick="shareProgress()" class="footer-action-btn" title="Compartir mi progreso">
-                    <i class="fas fa-share-alt"></i> Compartir
-                </button>
-                <button onclick="requestNotificationPermission()" class="footer-action-btn" title="Activar recordatorios">
-                    <i class="fas fa-bell"></i> Recordatorios
-                </button>
-            </div>
-            
-            <div class="footer-links">
-                <a href="#principiante" class="footer-link">Principiante</a>
-                <span class="footer-separator">•</span>
-                <a href="#intermedio" class="footer-link">Intermedio</a>
-                <span class="footer-separator">•</span>
-                <a href="#avanzado" class="footer-link">Avanzado</a>
+            <div class="footer-content">
+                <!-- Columna Izquierda -->
+                <div class="footer-left">
+                    <div class="footer-brand">
+                        <i class="fas fa-dumbbell"></i>
+                        <span>PowerRoutine</span>
+                    </div>
+                    <p class="footer-tagline"><i class="fas fa-heart"></i> Mantente activo, mantente saludable</p>
+                    <p class="footer-note"><i class="fas fa-info-circle"></i> Recuerda consultar con un profesional antes de comenzar cualquier rutina nueva</p>
+                    
+                    <div class="footer-links">
+                        <a href="#principiante" class="footer-link">Principiante</a>
+                        <span class="footer-separator">•</span>
+                        <a href="#intermedio" class="footer-link">Intermedio</a>
+                        <span class="footer-separator">•</span>
+                        <a href="#avanzado" class="footer-link">Avanzado</a>
+                    </div>
+                </div>
+                
+                <!-- Columna Derecha -->
+                <div class="footer-right">
+                    <h4 class="footer-actions-title">Herramientas</h4>
+                    <div class="footer-actions">
+                        <button onclick="startRestTimer(60)" class="footer-action-btn" title="Iniciar temporizador de descanso">
+                            <i class="fas fa-stopwatch"></i> Temporizador
+                        </button>
+                        <button onclick="shareProgress()" class="footer-action-btn" title="Compartir mi progreso">
+                            <i class="fas fa-share-alt"></i> Compartir
+                        </button>
+                        <button onclick="requestNotificationPermission()" class="footer-action-btn" title="Activar recordatorios">
+                            <i class="fas fa-bell"></i> Recordatorios
+                        </button>
+                    </div>
+                </div>
             </div>
             
             <div class="footer-copyright">

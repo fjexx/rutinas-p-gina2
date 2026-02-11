@@ -1038,18 +1038,28 @@ footer {
     margin-top: 64px;
     box-shadow: 0 -1px 3px 0 rgba(0, 0, 0, 0.1), 0 -1px 2px 0 rgba(0, 0, 0, 0.06);
     border-top: 1px solid var(--border-color);
-    text-align: center;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    margin-bottom: 32px;
+}
+
+/* Columna Izquierda */
+.footer-left {
+    text-align: left;
 }
 
 .footer-brand {
     display: flex;
     align-items: center;
-    justify-content: center;
     gap: 12px;
     font-size: 1.5rem;
     font-weight: 700;
     color: var(--primary-color);
-    margin-bottom: 24px;
+    margin-bottom: 16px;
     animation: fadeInScale 0.6s ease-out;
 }
 
@@ -1085,14 +1095,14 @@ footer {
     }
 }
 
-footer p {
+.footer-tagline {
     color: var(--text-dark);
     font-size: 1.125rem;
     font-weight: 500;
     margin-bottom: 12px;
 }
 
-footer p i {
+.footer-tagline i {
     margin-right: 8px;
     color: var(--primary-color);
     display: inline-block;
@@ -1118,7 +1128,7 @@ footer p i {
     color: var(--text-medium);
     font-size: 0.875rem;
     font-weight: 400;
-    font-style: normal;
+    margin-bottom: 20px;
 }
 
 .footer-note i {
@@ -1128,11 +1138,9 @@ footer p i {
 
 .footer-links {
     display: flex;
-    justify-content: center;
     align-items: center;
     gap: 16px;
     margin-top: 20px;
-    margin-bottom: 24px;
 }
 
 .footer-link {
@@ -1144,10 +1152,89 @@ footer p i {
     position: relative;
 }
 
+.footer-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -4px;
+    left: 50%;
+    background: var(--primary-light);
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+}
+
+.footer-link:hover {
+    color: var(--primary-light);
+}
+
+.footer-link:hover::after {
+    width: 100%;
+}
+
+.footer-separator {
+    color: var(--text-light);
+    font-weight: 300;
+}
+
+/* Columna Derecha */
+.footer-right {
+    text-align: right;
+}
+
+.footer-actions-title {
+    color: var(--text-dark);
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin-bottom: 16px;
+}
+
+.footer-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: flex-end;
+}
+
+.footer-action-btn {
+    background: rgba(129, 140, 248, 0.1);
+    border: 1px solid rgba(129, 140, 248, 0.3);
+    color: var(--primary-color);
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.footer-action-btn:hover {
+    background: rgba(129, 140, 248, 0.2);
+    border-color: var(--primary-color);
+    transform: translateX(-4px);
+    box-shadow: 0 4px 12px rgba(129, 140, 248, 0.3);
+}
+
+.footer-action-btn i {
+    font-size: 1rem;
+}
+
+/* Copyright */
 .footer-copyright {
-    margin-top: 24px;
-    padding-top: 20px;
+    margin-top: 32px;
+    padding-top: 24px;
     border-top: 1px solid var(--border-color);
+    text-align: center;
+}
+
+.footer-copyright p {
+    color: var(--text-light);
+    font-size: 0.875rem;
+    font-weight: 400;
+    margin: 0;
 }
 
 .footer-copyright p {
@@ -1610,13 +1697,31 @@ select option:checked {
     }
     
     /* Footer responsive */
-    .footer-links {
-        flex-direction: column;
-        gap: 12px;
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 32px;
     }
     
-    .footer-separator {
-        display: none;
+    .footer-left,
+    .footer-right {
+        text-align: center;
+    }
+    
+    .footer-brand {
+        justify-content: center;
+    }
+    
+    .footer-links {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    
+    .footer-actions {
+        align-items: center;
+    }
+    
+    .footer-action-btn:hover {
+        transform: translateY(-2px);
     }
 }
 
@@ -1628,6 +1733,28 @@ select option:checked {
     
     .nav-container {
         padding: 10px 12px;
+    }
+    
+    .footer-content {
+        gap: 24px;
+    }
+    
+    .footer-links {
+        flex-direction: column;
+        gap: 12px;
+    }
+    
+    .footer-separator {
+        display: none;
+    }
+    
+    .footer-actions {
+        width: 100%;
+    }
+    
+    .footer-action-btn {
+        width: 100%;
+        justify-content: center;
     }
     
     header.hero-banner {
