@@ -252,9 +252,21 @@
                         </div>
                     </div>
                     
-                    <div class="tips">
-                        <strong><i class="fas fa-lightbulb"></i> Consejos:</strong>
-                        <p>Descansa entre series (30-60 segundos). Escucha a tu cuerpo y no te esfuerces demasiado. La consistencia es más importante que la intensidad.</p>
+                    <div class="tips" data-tip-id="principiante">
+                        <div class="tips-header-content">
+                            <strong><i class="fas fa-lightbulb"></i> Consejos:</strong>
+                            <button class="tips-toggle-btn" data-tip-id="principiante">
+                                <span class="toggle-text">Leer más</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
+                        </div>
+                        <p class="tips-preview">Descansa entre series (30-60 segundos). Escucha a tu cuerpo y no te esfuerces demasiado.</p>
+                        <div class="tips-expanded" style="display: none;">
+                            <p><strong>Descanso adecuado:</strong> Entre series, toma 30-60 segundos para recuperarte. Esto permite que tus músculos se oxigenen y puedas mantener la forma correcta en cada repetición.</p>
+                            <p><strong>Escucha tu cuerpo:</strong> Si sientes dolor agudo (no confundir con la sensación de esfuerzo muscular), detente inmediatamente. El dolor es una señal de advertencia.</p>
+                            <p><strong>Consistencia sobre intensidad:</strong> Es mejor entrenar 3 veces por semana con intensidad moderada que una vez con intensidad extrema. Los resultados vienen con el tiempo y la regularidad.</p>
+                            <p><strong>Progresión gradual:</strong> Aumenta la dificultad solo cuando puedas completar todas las series con buena forma. No tengas prisa, tu cuerpo necesita tiempo para adaptarse.</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -304,9 +316,21 @@
                         </div>
                     </div>
                     
-                    <div class="tips">
-                        <strong><i class="fas fa-lightbulb"></i> Consejos:</strong>
-                        <p>Aumenta gradualmente la intensidad. Combina ejercicios de fuerza con cardio para mejores resultados. Descansa 1-2 días entre sesiones intensas.</p>
+                    <div class="tips" data-tip-id="intermedio">
+                        <div class="tips-header-content">
+                            <strong><i class="fas fa-lightbulb"></i> Consejos:</strong>
+                            <button class="tips-toggle-btn" data-tip-id="intermedio">
+                                <span class="toggle-text">Leer más</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
+                        </div>
+                        <p class="tips-preview">Aumenta gradualmente la intensidad. Combina ejercicios de fuerza con cardio para mejores resultados.</p>
+                        <div class="tips-expanded" style="display: none;">
+                            <p><strong>Progresión inteligente:</strong> Aumenta la intensidad en pequeños incrementos cada semana. Puedes agregar repeticiones, reducir descansos o aumentar la velocidad de ejecución.</p>
+                            <p><strong>Entrenamiento combinado:</strong> Alterna días de fuerza con días de cardio. Esta combinación maximiza la quema de grasa mientras construyes músculo.</p>
+                            <p><strong>Recuperación activa:</strong> Los días de descanso no significan inactividad total. Camina, estira o haz yoga suave para mantener el cuerpo activo sin sobrecargarlo.</p>
+                            <p><strong>Nutrición estratégica:</strong> Consume proteínas dentro de las 2 horas post-entrenamiento. Mantén una hidratación constante durante todo el día, no solo al entrenar.</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -364,14 +388,57 @@
                         </div>
                     </div>
                     
-                    <div class="tips">
-                        <strong><i class="fas fa-lightbulb"></i> Consejos:</strong>
-                        <p>Mantén la forma correcta incluso con alta intensidad. Hidrátate bien y asegúrate de tener una nutrición adecuada. Escucha a tu cuerpo para evitar lesiones.</p>
+                    <div class="tips" data-tip-id="avanzado">
+                        <div class="tips-header-content">
+                            <strong><i class="fas fa-lightbulb"></i> Consejos:</strong>
+                            <button class="tips-toggle-btn" data-tip-id="avanzado">
+                                <span class="toggle-text">Leer más</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
+                        </div>
+                        <p class="tips-preview">Mantén la forma correcta incluso con alta intensidad. Hidrátate bien y asegúrate de tener una nutrición adecuada.</p>
+                        <div class="tips-expanded" style="display: none;">
+                            <p><strong>Técnica impecable:</strong> A mayor intensidad, mayor riesgo de lesión. Nunca sacrifiques la forma por completar más repeticiones. La calidad siempre supera la cantidad.</p>
+                            <p><strong>Hidratación avanzada:</strong> Bebe al menos 3-4 litros de agua al día. Considera bebidas con electrolitos para entrenamientos de más de 60 minutos.</p>
+                            <p><strong>Nutrición de alto rendimiento:</strong> Calcula tus macros (proteínas, carbohidratos, grasas) según tus objetivos. Come cada 3-4 horas para mantener el metabolismo activo.</p>
+                            <p><strong>Prevención de lesiones:</strong> Incluye trabajo de movilidad y flexibilidad. Usa foam roller para liberación miofascial. Considera masajes deportivos mensuales.</p>
+                            <p><strong>Descanso estratégico:</strong> Duerme 8-9 horas. El sueño es cuando tu cuerpo se repara y crece. Considera siestas de 20-30 minutos si entrenas dos veces al día.</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
     </main>
+
+    <!-- Sección de Autores -->
+    <section class="authors-section">
+        <div class="container">
+            <div class="authors-card">
+                <div class="authors-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <div class="authors-content">
+                    <h3 class="authors-title">Autores</h3>
+                    <div class="authors-names">
+                        <span class="author-name">Franklin Ordóñez</span>
+                        <span class="author-separator">•</span>
+                        <span class="author-name">Duván Punina</span>
+                        <span class="author-separator">•</span>
+                        <span class="author-name">Joseph Alume</span>
+                    </div>
+                </div>
+                <div class="authors-badge">
+                    <div class="badge-content">
+                        <i class="fas fa-graduation-cap"></i>
+                        <div class="badge-text">
+                            <span class="badge-grade">3ro de Bachillerato</span>
+                            <span class="badge-specialty">Informática Paralelo "A"</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <footer>
         <div class="container">

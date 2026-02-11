@@ -111,8 +111,34 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Enhanced tips animation on scroll
+    // Enhanced tips animation on scroll with notification sound
     const tipsElements = document.querySelectorAll('.tips');
+    
+    // Create notification sound using Web Audio API
+    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    
+    function playNotificationSound() {
+        try {
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+            
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+            
+            // Pleasant notification sound (two tones)
+            oscillator.frequency.setValueAtTime(800, audioContext.currentTime);
+            oscillator.frequency.setValueAtTime(1000, audioContext.currentTime + 0.1);
+            
+            gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3);
+            
+            oscillator.start(audioContext.currentTime);
+            oscillator.stop(audioContext.currentTime + 0.3);
+        } catch (error) {
+            console.log('Audio not available:', error);
+        }
+    }
+    
     const tipsObserver = new IntersectionObserver((entries, observer) => {
         entries.forEach((entry, index) => {
             if (entry.isIntersecting && !entry.target.classList.contains('tips-animated')) {
@@ -120,23 +146,42 @@ document.addEventListener('DOMContentLoaded', function() {
                 setTimeout(() => {
                     entry.target.classList.add('tips-animated');
                     entry.target.style.animationDelay = '0s';
-                }, index * 100);
+                    
+                    // Play notification sound
+                    playNotificationSound();
+                }, index * 150);
                 observer.unobserve(entry.target);
             }
         });
     }, { threshold: 0.2 });
     
     tipsElements.forEach((tip, index) => {
-        tip.style.animationDelay = `${index * 0.1}s`;
+        tip.style.animationDelay = `${index * 0.15}s`;
         tipsObserver.observe(tip);
-        
-        // Add interactive click effect
-        tip.addEventListener('click', function() {
-            this.style.transform = 'scale(1.05)';
-            setTimeout(() => {
-                this.style.transform = '';
-            }, 200);
-        });
+    });
+    
+    // Toggle tips expanded content
+    document.addEventListener('click', function(e) {
+        const toggleBtn = e.target.closest('.tips-toggle-btn');
+        if (toggleBtn) {
+            const tipId = toggleBtn.getAttribute('data-tip-id');
+            const tipElement = document.querySelector(`.tips[data-tip-id="${tipId}"]`);
+            const expandedContent = tipElement.querySelector('.tips-expanded');
+            const toggleText = toggleBtn.querySelector('.toggle-text');
+            
+            if (expandedContent.style.display === 'none') {
+                expandedContent.style.display = 'block';
+                toggleText.textContent = 'Leer menos';
+                toggleBtn.classList.add('active');
+                
+                // Play a subtle sound when expanding
+                playNotificationSound();
+            } else {
+                expandedContent.style.display = 'none';
+                toggleText.textContent = 'Leer más';
+                toggleBtn.classList.remove('active');
+            }
+        }
     });
 
     // NAVIGATION - Enhanced system with level card functionality
