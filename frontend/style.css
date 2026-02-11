@@ -775,6 +775,19 @@ main {
     background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
     padding: 32px 0;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
+    opacity: 0;
+    animation: fadeInUp 0.8s ease-out forwards;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .authors-card {
@@ -787,12 +800,14 @@ main {
     gap: 24px;
     border: 1px solid rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(10px);
-    transition: all 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .authors-card:hover {
     background: rgba(255, 255, 255, 0.08);
     border-color: rgba(129, 140, 248, 0.3);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), 0 0 20px rgba(129, 140, 248, 0.2);
 }
 
 .authors-icon {
@@ -804,11 +819,31 @@ main {
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
+    transition: all 0.4s ease;
+    animation: iconPulse 2s ease-in-out infinite;
+}
+
+@keyframes iconPulse {
+    0%, 100% {
+        box-shadow: 0 0 0 0 rgba(129, 140, 248, 0.4);
+    }
+    50% {
+        box-shadow: 0 0 0 10px rgba(129, 140, 248, 0);
+    }
+}
+
+.authors-card:hover .authors-icon {
+    transform: scale(1.1) rotate(5deg);
 }
 
 .authors-icon i {
     font-size: 1.5rem;
     color: white;
+    transition: transform 0.3s ease;
+}
+
+.authors-card:hover .authors-icon i {
+    transform: scale(1.1);
 }
 
 .authors-content {
@@ -820,6 +855,11 @@ main {
     font-size: 1.125rem;
     font-weight: 600;
     margin-bottom: 6px;
+    transition: color 0.3s ease;
+}
+
+.authors-card:hover .authors-title {
+    color: var(--primary-light);
 }
 
 .authors-names {
@@ -827,12 +867,24 @@ main {
     font-size: 0.95rem;
     font-weight: 400;
     margin: 0 0 8px 0;
+    transition: transform 0.3s ease;
+}
+
+.authors-card:hover .authors-names {
+    transform: translateX(4px);
 }
 
 .lead-author {
     color: var(--warning-color) !important;
     font-weight: 600 !important;
     text-shadow: 0 0 10px rgba(251, 191, 36, 0.3) !important;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.authors-card:hover .lead-author {
+    text-shadow: 0 0 20px rgba(251, 191, 36, 0.6) !important;
+    transform: scale(1.05);
 }
 
 .developer-note {
@@ -847,11 +899,28 @@ main {
     background: rgba(129, 140, 248, 0.1) !important;
     border-radius: 6px !important;
     border: 1px solid rgba(129, 140, 248, 0.2) !important;
+    transition: all 0.3s ease;
+}
+
+.authors-card:hover .developer-note {
+    background: rgba(129, 140, 248, 0.2) !important;
+    border-color: rgba(129, 140, 248, 0.4) !important;
+    transform: translateX(4px);
 }
 
 .developer-note i {
     font-size: 0.8rem !important;
     color: var(--primary-light) !important;
+    animation: codeIcon 2s ease-in-out infinite;
+}
+
+@keyframes codeIcon {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
 }
 
 .authors-badge {
@@ -862,11 +931,24 @@ main {
     padding: 12px 20px;
     border-radius: 10px;
     border: 1px solid rgba(251, 191, 36, 0.2);
+    transition: all 0.4s ease;
+}
+
+.authors-card:hover .authors-badge {
+    background: rgba(251, 191, 36, 0.15);
+    border-color: rgba(251, 191, 36, 0.4);
+    transform: scale(1.05);
 }
 
 .authors-badge i {
     font-size: 1.5rem;
     color: var(--warning-color);
+    transition: all 0.3s ease;
+}
+
+.authors-card:hover .authors-badge i {
+    transform: rotate(10deg) scale(1.1);
+    filter: drop-shadow(0 0 8px var(--warning-color));
 }
 
 .badge-text {
