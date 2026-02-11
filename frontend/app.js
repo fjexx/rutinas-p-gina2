@@ -272,7 +272,8 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    console.log('💪 Rutinas de Ejercicio - Sitio cargado correctamente');
+    console.log('💪 PowerRoutine - Sistema cargado correctamente');
+    console.log('🎯 Versión 2.0 - Desarrollado por Franklin Ordóñez, Duván Punina y Joseph Alume');
     
     // Scroll to top button
     const scrollBtn = document.createElement('button');
