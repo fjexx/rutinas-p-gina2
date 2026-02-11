@@ -111,6 +111,34 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
+    // Enhanced tips animation on scroll
+    const tipsElements = document.querySelectorAll('.tips');
+    const tipsObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach((entry, index) => {
+            if (entry.isIntersecting && !entry.target.classList.contains('tips-animated')) {
+                // Add staggered delay for multiple tips
+                setTimeout(() => {
+                    entry.target.classList.add('tips-animated');
+                    entry.target.style.animationDelay = '0s';
+                }, index * 100);
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.2 });
+    
+    tipsElements.forEach((tip, index) => {
+        tip.style.animationDelay = `${index * 0.1}s`;
+        tipsObserver.observe(tip);
+        
+        // Add interactive click effect
+        tip.addEventListener('click', function() {
+            this.style.transform = 'scale(1.05)';
+            setTimeout(() => {
+                this.style.transform = '';
+            }, 200);
+        });
+    });
+
     // NAVIGATION - Enhanced system with level card functionality
     function smoothScrollTo(target) {
         const navbar = document.querySelector('.navbar');

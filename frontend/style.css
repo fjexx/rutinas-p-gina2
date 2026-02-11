@@ -569,7 +569,7 @@ main {
     transform: scale(1.2);
 }
 
-/* Tips Section */
+/* Tips Section - Enhanced with animations */
 .tips {
     background: linear-gradient(135deg, rgba(251, 191, 36, 0.15) 0%, rgba(245, 158, 11, 0.15) 100%);
     padding: 32px;
@@ -578,6 +578,63 @@ main {
     margin-top: 40px;
     border: 1px solid rgba(251, 191, 36, 0.3);
     backdrop-filter: blur(10px);
+    position: relative;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+    animation: slideInTip 0.6s ease-out forwards;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+}
+
+@keyframes slideInTip {
+    0% {
+        opacity: 0;
+        transform: translateY(20px) scale(0.95);
+    }
+    60% {
+        transform: translateY(-5px) scale(1.02);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.tips::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(251, 191, 36, 0.1) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+}
+
+.tips:hover::before {
+    opacity: 1;
+    animation: pulseGlow 2s ease-in-out infinite;
+}
+
+@keyframes pulseGlow {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 0.3;
+    }
+    50% {
+        transform: scale(1.1);
+        opacity: 0.6;
+    }
+}
+
+.tips:hover {
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 0 12px 32px rgba(251, 191, 36, 0.3), 0 0 20px rgba(251, 191, 36, 0.2);
+    border-color: rgba(251, 191, 36, 0.6);
+    background: linear-gradient(135deg, rgba(251, 191, 36, 0.2) 0%, rgba(245, 158, 11, 0.2) 100%);
 }
 
 .tips strong {
@@ -588,20 +645,44 @@ main {
     margin-bottom: 12px;
     font-size: 1.125rem;
     font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.tips:hover strong {
+    transform: translateX(4px);
+    color: #fbbf24;
 }
 
 .tips strong i {
     color: var(--warning-color);
     display: inline-block;
-    animation: glow 2s ease-in-out infinite alternate;
+    animation: glowPulse 2s ease-in-out infinite alternate;
+    transition: all 0.3s ease;
 }
 
-@keyframes glow {
+.tips:hover strong i {
+    animation: spinGlow 0.6s ease-out, glowPulse 2s ease-in-out infinite alternate;
+    transform: scale(1.2);
+}
+
+@keyframes glowPulse {
     from {
         filter: drop-shadow(0 0 5px var(--warning-color));
     }
     to {
-        filter: drop-shadow(0 0 10px var(--warning-color));
+        filter: drop-shadow(0 0 15px var(--warning-color));
+    }
+}
+
+@keyframes spinGlow {
+    0% {
+        transform: rotate(0deg) scale(1);
+    }
+    50% {
+        transform: rotate(180deg) scale(1.3);
+    }
+    100% {
+        transform: rotate(360deg) scale(1.2);
     }
 }
 
@@ -609,6 +690,11 @@ main {
     color: var(--text-medium);
     line-height: 1.8;
     font-weight: 400;
+    transition: color 0.3s ease;
+}
+
+.tips:hover p {
+    color: var(--text-dark);
 }
 
 /* Footer */
